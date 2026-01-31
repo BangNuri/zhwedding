@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Wedding of Zahra & Hadi</title>
+    <meta name="description" content="Undangan Pernikahan Syariah Zahra & Hadi">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- CSS UTAMA (Native - Anti Blank) -->
+    <style>
+        /* Reset Dasar */
+        html, body {
+            background-color: #050505 !important;
+            color: #ffffff !important;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: system-ui, -apple-system, sans-serif;
+            overflow: hidden; /* Dikunci saat loading/cover */
+        }
+
+        /* Loader Screen Elegan */
+        #loading-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #050505; z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+        }
+        .loader-ring {
+            width: 60px; height: 60px;
+            border: 2px solid rgba(212, 175, 55, 0.1);
+            border-top: 2px solid #D4AF37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        .loader-text {
+            font-size: 10px; letter-spacing: 4px; color: #D4AF37;
+            text-transform: uppercase; animation: pulse 2s infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+    </style>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 
+                        gold: '#D4AF37', 
+                        dark: '#1a1a1a', 
+                        darker: '#0a0a0a' 
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        script: ['Great Vibes', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Extended Styles -->
+    <style>
+        /* --- Typography & Gradients --- */
+        .text-gold-gradient {
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            background-size: 200% auto;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
+            animation: shine 8s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+        
+        .writing-vertical { writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg); }
+        
+        .glass-card {
+            background: rgba(20, 20, 20, 0.7); /* Slightly darker for better readability on img bg */
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Smoother Entrance Animations --- */
+        .fade-in-element { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+        .fade-in-element.is-visible { opacity: 1; transform: translateY(0); }
+        
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 12s linear infinite; }
+        
+        @keyframes float { 
+            0%, 100% { transform: translateY(0); } 
+            50% { transform: translateY(-10px); } 
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        
+        @keyframes ping-slow { 75%, 100% { transform: scale(1.5); opacity: 0; } }
+        .animate-ping-slow { animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite; }
+        
+        @keyframes ken-burns { 0% { transform: scale(1); } 100% { transform: scale(1.15); } }
+        .animate-ken-burns { animation: ken-burns 30s alternate infinite ease-in-out; }
+
+        /* --- Interactive & Firefly Effects --- */
+        #background-effects {
+            position: fixed; inset: 0; pointer-events: none; z-index: 1;
+            overflow: hidden;
+        }
+
+        /* Firefly Particle */
+        .firefly {
+            position: absolute;
+            width: 4px; height: 4px;
+            background-color: #D4AF37;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(212, 175, 55, 0.4);
+            opacity: 0;
+            animation: drift ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(0); opacity: 0; }
+            20% { opacity: 0.8; transform: translate(10px, -20px) scale(1); }
+            80% { opacity: 0.6; transform: translate(-10px, -80px) scale(0.8); }
+            100% { transform: translate(0, -100px) scale(0); opacity: 0; }
+        }
+
+        /* Shooting Star (Refined) */
+        .star-trail {
+            position: absolute; height: 1px; width: 100px;
+            background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.8), rgba(255,255,255,0));
+            opacity: 0; 
+            transform: rotate(-45deg);
+            animation: shooting-star 6s ease-in-out infinite;
+            will-change: transform, opacity;
+        }
+        @keyframes shooting-star {
+            0% { transform: translate(-100px, 100px) rotate(-45deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            20% { transform: translate(200px, -200px) rotate(-45deg) scale(1); opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        /* Door Animation */
+        .door-panel { transition: transform 1.8s cubic-bezier(0.16, 1, 0.3, 1); z-index: 40; }
+        .door-left-open { transform: translateX(-100%) !important; }
+        .door-right-open { transform: translateX(100%) !important; }
+        @media (max-width: 768px) {
+            .door-left-open { transform: translateY(-100%) !important; }
+            .door-right-open { transform: translateY(100%) !important; }
+        }
+
+        /* Fixed Background Image for Whole Page */
+        .bg-fixed-flower {
+            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        /* Dark overlay for readability */
+        .section-overlay {
+            background-color: rgba(5, 5, 5, 0.85); /* Dark tint */
+            width: 100%; height: 100%;
+        }
+    </style>
+</head>
+<body style="background-color: #050505;">
+
+    <!-- 1. LOADING SCREEN -->
+    <div id="loading-screen">
+        <div class="loader-ring"></div>
+        <p class="loader-text">MEMUAT UNDANGAN</p>
+    </div>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop preload="none">
+        <source src="Ridjaal Ahmed hadith recital On wedding - BFR_ BEST FREE RECITATION _.mp3" type="audio/mpeg">
+        <source src="https://archive.org/download/ridjaal-ahmed-hadith-recital-on-wedding-bfr-best-free-recitation/Ridjaal%20Ahmed%20hadith%20recital%20On%20wedding%20-%20BFR_%20BEST%20FREE%20RECITATION%20_.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- --- 2. COVER SECTION --- -->
+    <div id="cover-section" class="fixed inset-0 z-50 overflow-hidden text-white" style="background-color: #000;">
+        <div class="absolute inset-0 bg-black">
+            <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] animate-pulse-slow"></div>
+        </div>
+
+        <!-- Door Left -->
+        <div id="door-left" class="door-panel absolute top-0 left-0 w-full md:w-1/2 h-1/2 md:h-full bg-[#080808] border-b-2 md:border-b-0 md:border-r-2 border-[#D4AF37]/40 flex flex-col items-center justify-end md:justify-center pb-8 md:pb-0 shadow-2xl">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10"></div>
+            <div class="relative z-10 text-center px-6 transform transition-transform duration-1000 delay-100">
+                <p class="text-gold uppercase tracking-[0.4em] text-xs font-bold mb-4 animate-float">The Wedding of</p>
+                <h1 class="text-5xl md:text-8xl font-script text-gold-gradient leading-none drop-shadow-2xl">Zahra</h1>
+            </div>
+        </div>
+
+        <!-- Door Right -->
+        <div id="door-right" class="door-panel absolute bottom-0 right-0 w-full h-1/2 md:w-1/2 md:h-full bg-[#080808] border-t-2 md:border-t-0 md:border-l-2 border-[#D4AF37]/40 flex flex-col items-center justify-start md:justify-center pt-8 md:pt-0 shadow-2xl">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10"></div>
+            <div class="relative z-10 text-center px-6 transform transition-transform duration-1000 delay-200">
+                <h1 class="text-5xl md:text-8xl font-script text-gold-gradient mb-6 leading-none drop-shadow-2xl">Hadi</h1>
+                <div class="glass-card py-3 px-8 rounded-full inline-block backdrop-blur-md">
+                    <p class="text-gray-300 text-[10px] italic mb-1">Kepada Yth.</p>
+                    <h3 id="guest-name-display" class="text-gold text-sm font-bold uppercase tracking-widest">Tamu Undangan</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Button -->
+        <div id="open-btn-container" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 flex flex-col items-center gap-4 transition-all duration-700 ease-out">
+            <button id="open-invitation-btn" class="group relative w-20 h-20 md:w-24 md:h-24 rounded-full bg-black/80 backdrop-blur border border-[#D4AF37] flex items-center justify-center shadow-[0_0_30px_rgba(212,175,55,0.4)] hover:scale-110 transition-transform duration-300 cursor-pointer">
+                <div class="absolute inset-0 rounded-full border border-[#D4AF37] animate-ping-slow opacity-20"></div>
+                <i data-lucide="mail-open" class="text-gold w-8 h-8 md:w-10 md:h-10 group-hover:text-white transition-colors"></i>
+            </button>
+            <p class="text-gold text-[10px] uppercase tracking-[0.2em] font-bold animate-pulse">Buka Undangan</p>
+        </div>
+    </div>
+
+    <!-- --- 3. MAIN CONTENT --- -->
+    <div id="main-content" style="display: none;" class="bg-fixed-flower fixed inset-0 overflow-y-scroll snap-y snap-mandatory scroll-smooth text-white z-20">
+        
+        <!-- Background Effects Layer -->
+        <div id="background-effects">
+            <!-- Partikel Fireflies akan digenerate di sini oleh JS -->
+        </div>
+        
+        <!-- Music Control -->
+        <div class="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-4">
+            <div class="text-gold text-[8px] font-bold tracking-widest writing-vertical hidden md:block animate-bounce">SCROLL</div>
+            <button id="music-toggle-btn" class="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center glass-card text-gold shadow-lg hover:bg-gold hover:text-black transition-all duration-300 cursor-pointer">
+                <i data-lucide="volume-2" width="18"></i>
+            </button>
+        </div>
+
+        <!-- HERO SECTION -->
+        <section class="snap-start h-screen relative flex items-center justify-center overflow-hidden w-full">
+            <div class="section-overlay absolute inset-0 z-0"></div> <!-- Dark Overlay -->
+            
+            <div class="relative z-10 text-center px-6 w-full max-w-4xl mx-auto flex flex-col items-center h-full justify-center">
+                <div class="fade-in-element">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Basmala.svg" alt="Bismillah" class="h-10 md:h-14 mx-auto mb-8 invert opacity-80" loading="lazy">
+                    <p class="text-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-4">The Wedding Celebration Of</p>
+                    <h1 class="text-6xl md:text-9xl font-script text-gold-gradient mb-6 py-2 leading-tight drop-shadow-2xl">
+                        Zahra <span class="text-white/50 text-4xl align-middle font-serif">&</span> Hadi
+                    </h1>
+                    <div class="glass-card inline-flex items-center justify-center gap-6 py-3 px-8 rounded-full my-8">
+                        <span class="text-gray-300 font-bold tracking-widest uppercase text-[10px] md:text-xs">Sabtu</span>
+                        <div class="w-1 h-1 rounded-full bg-gold"></div>
+                        <span class="text-gold font-serif font-bold text-lg">04 . 04 . 26</span>
+                        <div class="w-1 h-1 rounded-full bg-gold"></div>
+                        <span class="text-gray-300 font-bold tracking-widest uppercase text-[10px] md:text-xs">Perawang</span>
+                    </div>
+                    <div class="flex justify-center flex-wrap mt-6 gap-3" id="countdown-container"></div>
+                </div>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-60 text-gold">
+                <i data-lucide="chevron-down" width="24"></i>
+            </div>
+        </section>
+
+        <!-- AYAT SECTION -->
+        <section class="snap-start min-h-screen flex items-center justify-center py-20 px-6 relative">
+            <div class="section-overlay absolute inset-0 z-0"></div> <!-- Dark Overlay -->
+            <div class="max-w-3xl mx-auto text-center relative z-10 fade-in-element">
+                <div class="mb-8 flex justify-center text-gold/40">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>
+                </div>
+                <p class="text-gold text-2xl md:text-3xl mb-8 leading-loose font-serif font-bold px-4" dir="rtl">
+                    وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+                </p>
+                <div class="border-l-2 border-gold pl-6 ml-4 text-left">
+                    <p class="text-gray-400 italic text-xs md:text-sm leading-relaxed font-medium">
+                        "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang."
+                    </p>
+                    <p class="text-gold font-bold tracking-widest text-[9px] uppercase mt-4">— Q.S. Ar-Rum: 21 —</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- COUPLE SECTION -->
+        <section class="snap-start min-h-screen flex items-center justify-center py-20 relative">
+            <div class="section-overlay absolute inset-0 z-0"></div> <!-- Dark Overlay -->
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center mb-12 fade-in-element">
+                    <h2 class="text-4xl md:text-6xl font-script text-gold-gradient mb-2">Mempelai</h2>
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-gray-500">The Happy Couple</p>
+                </div>
+                <div class="flex flex-col md:flex-row items-center justify-center gap-10 md:gap-16">
+                    <!-- Bride -->
+                    <div class="text-center group fade-in-element">
+                        <div class="relative w-56 h-72 md:w-64 md:h-80 mx-auto mb-6 p-2 border border-gold/30 rounded-t-full transition-transform duration-700 group-hover:-translate-y-2">
+                            <div class="w-full h-full rounded-t-full overflow-hidden relative">
+                                <img src="https://hehq4lncabahxdoc.public.blob.vercel-storage.com/1769749057229-gnntnr.jpg" alt="Zahra" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                        </div>
+                        <h3 class="text-3xl font-script text-gold mb-1">Zahra Raihanah</h3>
+                        <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Putri ke-3 Dari</p>
+                        <p class="text-white text-xs mt-1">Bpk. Supardi & Ibu Kusnul Khotimah</p>
+                    </div>
+                    
+                    <div class="text-gold font-script text-4xl opacity-50 fade-in-element animate-pulse">&</div>
+                    
+                    <!-- Groom -->
+                    <div class="text-center group fade-in-element">
+                        <div class="relative w-56 h-72 md:w-64 md:h-80 mx-auto mb-6 p-2 border border-gold/30 rounded-t-full transition-transform duration-700 group-hover:-translate-y-2">
+                            <div class="w-full h-full rounded-t-full overflow-hidden relative">
+                                <img src="https://hehq4lncabahxdoc.public.blob.vercel-storage.com/1769749068606-vqy7qg.jpg" alt="Hadi" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            </div>
+                        </div>
+                        <h3 class="text-3xl font-script text-gold mb-1">Abdul Hadi, S.H</h3>
+                        <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest">Putra ke-2 Dari</p>
+                        <p class="text-white text-xs mt-1">Bpk. Arif Hidayat & Ibu Rita Yuniarti</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENTS SECTION -->
+        <section class="snap-start min-h-screen flex items-center justify-center py-20 px-6">
+            <div class="section-overlay absolute inset-0 z-0"></div> <!-- Dark Overlay -->
+            <div class="max-w-5xl w-full relative z-10">
+                <div class="text-center mb-12 fade-in-element">
+                    <h2 class="text-4xl md:text-6xl font-script text-gold-gradient mb-2">Rangkaian Acara</h2>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-gray-500">Insya Allah akan diselenggarakan pada:</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Akad -->
+                    <div class="fade-in-element glass-card p-8 rounded-xl relative overflow-hidden group hover:border-gold/60 transition-all duration-500 hover:-translate-y-1">
+                        <div class="absolute top-0 right-0 p-6 text-gold/10 group-hover:text-gold/20 transition-colors"><i data-lucide="sparkles" width="80" height="80"></i></div>
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-3xl font-serif text-white mb-2">Akad Nikah</h3>
+                            <div class="h-px w-12 bg-gold mx-auto mb-6"></div>
+                            <div class="space-y-4 text-sm text-gray-300">
+                                <div class="flex items-center justify-center gap-3"><i data-lucide="calendar" class="text-gold" width="16"></i><span>Sabtu, 4 April 2026</span></div>
+                                <div class="flex items-center justify-center gap-3"><i data-lucide="clock" class="text-gold" width="16"></i><span>09:00 - 11:00 WIB</span></div>
+                                <div class="flex items-start justify-center gap-3"><i data-lucide="map-pin" class="text-gold mt-1" width="16"></i><span>KPR 1 Perawang<br/><span class="text-xs text-gray-500">Jl. Tiga No.45 Blok C, Riau</span></span></div>
+                            </div>
+                            <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=0.669789,101.597772')" class="mt-8 px-6 py-2 border border-gold text-gold text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-all rounded-full flex items-center justify-center gap-2 mx-auto cursor-pointer">Google Maps</button>
+                        </div>
+                    </div>
+                    <!-- Resepsi -->
+                    <div class="fade-in-element glass-card p-8 rounded-xl relative overflow-hidden group hover:border-gold/60 transition-all duration-500 hover:-translate-y-1">
+                        <div class="absolute top-0 right-0 p-6 text-gold/10 group-hover:text-gold/20 transition-colors"><i data-lucide="heart" width="80" height="80"></i></div>
+                        <div class="relative z-10 text-center">
+                            <h3 class="text-3xl font-serif text-white mb-2">Walimatul 'Ursy</h3>
+                            <div class="h-px w-12 bg-gold mx-auto mb-6"></div>
+                            <div class="space-y-4 text-sm text-gray-300">
+                                <div class="flex items-center justify-center gap-3"><i data-lucide="calendar" class="text-gold" width="16"></i><span>Sabtu, 4 April 2026</span></div>
+                                <div class="flex items-center justify-center gap-3"><i data-lucide="clock" class="text-gold" width="16"></i><span>11:00 - 18:00 WIB</span></div>
+                                <div class="flex items-start justify-center gap-3"><i data-lucide="map-pin" class="text-gold mt-1" width="16"></i><span>KPR 1 Perawang<br/><span class="text-xs text-gray-500">Jl. Tiga No.45 Blok C, Riau</span></span></div>
+                            </div>
+                            <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=0.669789,101.597772')" class="mt-8 px-6 py-2 border border-gold text-gold text-[10px] font-bold uppercase tracking-widest hover:bg-gold hover:text-black transition-all rounded-full flex items-center justify-center gap-2 mx-auto cursor-pointer">Google Maps</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GIFT SECTION -->
+        <section class="snap-start min-h-screen flex items-center justify-center py-20 px-6">
+            <div class="section-overlay absolute inset-0 z-0"></div> <!-- Dark Overlay -->
+            <div class="max-w-2xl w-full text-center fade-in-element relative z-10">
+                <div class="mb-10">
+                    <h2 class="text-4xl md:text-6xl font-script text-gold-gradient mb-2">Tanda Kasih</h2>
+                    <p class="text-[10px] uppercase tracking-widest text-gray-500">Kirim Kado & Doa Restu</p>
+                </div>
+                <div class="glass-card p-10 rounded-2xl relative overflow-hidden transition-transform duration-500 hover:scale-105">
+                    <div class="mb-6 text-gold"><i data-lucide="gift" width="40"></i></div>
+                    <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-2">Alamat Pengiriman</p>
+                    <h4 class="text-2xl font-serif text-white mb-2">Zahra & Hadi</h4>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-8">KPR 1 Jl. Tiga No.45 Blok C,<br/>Perawang, Riau</p>
+                    <button onclick="copyAddress()" id="copy-btn" class="flex items-center justify-center gap-2 w-full max-w-xs mx-auto py-3 bg-gold text-black rounded-sm hover:brightness-110 transition-all font-bold text-[10px] uppercase tracking-widest cursor-pointer"><i data-lucide="copy" width="14" id="copy-icon"></i><span id="copy-text">Salin Alamat</span></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP & WISHES -->
+        <section class="snap-start min-h-screen flex flex-col justify-center py-20 px-6">
+            <div class="section-overlay absolute inset-0 z-0"></div> <!-- Dark Overlay -->
+            <div class="max-w-5xl mx-auto w-full grid md:grid-cols-5 gap-10 relative z-10">
+                <div class="md:col-span-2 fade-in-element">
+                    <h3 class="text-3xl font-serif text-gold mb-6">Buku Tamu</h3>
+                    <form id="rsvp-form" class="space-y-4 glass-card p-6 rounded-xl">
+                        <div><label class="block text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-2">Nama</label><input type="text" id="form-guest-name" readonly class="w-full bg-black/50 border border-gray-700 text-gray-300 p-3 rounded-sm focus:border-gold outline-none text-sm transition-colors"></div>
+                        <div>
+                            <label class="block text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-2">Kehadiran</label>
+                            <div class="flex gap-2">
+                                <button type="button" class="rsvp-status-btn flex-1 py-3 text-[10px] font-bold uppercase tracking-widest rounded-sm border bg-gold text-black border-gold transition-all" data-status="attending" onclick="setAttendance('attending', this)">Hadir</button>
+                                <button type="button" class="rsvp-status-btn flex-1 py-3 text-[10px] font-bold uppercase tracking-widest rounded-sm border bg-transparent text-gray-500 border-gray-700 transition-all" data-status="unable" onclick="setAttendance('unable', this)">Maaf</button>
+                            </div>
+                        </div>
+                        <div><label class="block text-[10px] uppercase text-gray-500 font-bold tracking-widest mb-2">Ucapan</label><textarea id="form-message" required placeholder="Tuliskan doa terbaik..." class="w-full h-24 bg-black/50 border border-gray-700 text-gray-300 p-3 rounded-sm focus:border-gold outline-none text-sm resize-none transition-colors"></textarea></div>
+                        <button type="submit" id="submit-btn" class="w-full py-3 bg-white text-black font-bold uppercase tracking-[0.2em] text-[10px] rounded-sm hover:bg-gray-200 transition-all flex items-center justify-center gap-2 cursor-pointer">KIRIM <i data-lucide="send" width="12"></i></button>
+                        <div id="submit-success" class="text-center mt-2 hidden text-green-500 text-xs font-bold uppercase"><i data-lucide="check" width="12" class="inline"></i> Terkirim</div>
+                    </form>
+                </div>
+                <div class="md:col-span-3 h-[500px] flex flex-col fade-in-element">
+                    <h3 class="text-3xl font-serif text-gold mb-6">Doa & Harapan</h3>
+                    <div id="prayers-list" class="flex-1 overflow-y-auto pr-2 space-y-3 custom-scrollbar">
+                        <div class="text-center py-10 text-gray-600 text-xs uppercase tracking-widest">Memuat data...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="snap-start h-[50vh] flex flex-col items-center justify-center relative overflow-hidden">
+            <div class="section-overlay absolute inset-0 z-0"></div> <!-- Dark Overlay -->
+            <div class="relative z-10 text-center px-6">
+                <h2 class="text-6xl md:text-8xl font-script text-gold-gradient mb-6">Zahra & Hadi</h2>
+                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-widest mb-8">Terima Kasih Atas Doa Restu Anda</p>
+                <div class="h-px w-20 bg-gold/30 mx-auto mb-4"></div>
+                <p class="text-gray-700 text-[8px] font-bold uppercase tracking-widest">Premium Digital Invitation</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts (Moved to bottom for performance) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    
+    <script>
+        // Remove Loading Screen Safely
+        function removeLoader() {
+            const loader = document.getElementById('loading-screen');
+            if(loader) {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                document.body.style.overflow = 'auto'; // Re-enable scroll
+            }
+        }
+
+        // Failsafe: Remove loader after 5 seconds even if everything fails
+        setTimeout(removeLoader, 5000);
+        window.addEventListener('load', removeLoader);
+
+        // Config
+        const supabaseUrl = 'https://htlybkpvbnonsroksftg.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh0bHlia3B2Ym5vbnNyb2tzZnRnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk4NDg4NjYsImV4cCI6MjA4NTQyNDg2Nn0.BsCU37PAQ6Hov8-u45cAVJEOSBrXKIui5Cs14PBG3-w';
+        let supabaseClient = null;
+        let currentAttendance = 'attending';
+
+        // Elements
+        const els = {
+            cover: document.getElementById('cover-section'),
+            main: document.getElementById('main-content'),
+            leftDoor: document.getElementById('door-left'),
+            rightDoor: document.getElementById('door-right'),
+            openBtnContainer: document.getElementById('open-btn-container'),
+            openBtn: document.getElementById('open-invitation-btn'),
+            audio: document.getElementById('bg-music'),
+            musicBtn: document.getElementById('music-toggle-btn'),
+            guestName: document.getElementById('guest-name-display'),
+            formName: document.getElementById('form-guest-name'),
+            list: document.getElementById('prayers-list')
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.lucide) lucide.createIcons();
+
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('to') ? decodeURIComponent(params.get('to')) : "Tamu Undangan";
+            if(els.guestName) els.guestName.textContent = name;
+            if(els.formName) els.formName.value = name;
+
+            try {
+                if (window.supabase) {
+                    supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+                    fetchPrayers();
+                    setupRealtime();
+                }
+            } catch(e) { console.log('Supabase init error', e); }
+        });
+
+        // Open Action
+        if (els.openBtn) {
+            els.openBtn.addEventListener('click', () => {
+                if(els.audio) els.audio.play().catch(() => {});
+                
+                els.openBtnContainer.style.opacity = '0';
+                els.leftDoor.classList.add('door-left-open');
+                els.rightDoor.classList.add('door-right-open');
+
+                setTimeout(() => {
+                    els.cover.style.display = 'none';
+                    // Use JS style to override inline CSS if needed
+                    els.main.style.display = 'block'; 
+                    
+                    // Force layout recalc
+                    void els.main.offsetWidth;
+                    els.main.style.opacity = '1';
+                    
+                    createEffects();
+                    initObserver();
+                }, 1000);
+            });
+        }
+
+        // Music
+        if(els.musicBtn && els.audio) {
+            els.musicBtn.addEventListener('click', () => {
+                if(els.audio.paused) {
+                    els.audio.play();
+                    els.musicBtn.innerHTML = '<i data-lucide="volume-2" width="18"></i>';
+                    els.musicBtn.classList.add('animate-spin-slow');
+                } else {
+                    els.audio.pause();
+                    els.musicBtn.innerHTML = '<i data-lucide="volume-x" width="18"></i>';
+                    els.musicBtn.classList.remove('animate-spin-slow');
+                }
+                lucide.createIcons();
+            });
+        }
+
+        // Effects
+        function initObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-in-element').forEach(el => observer.observe(el));
+        }
+
+        function createEffects() {
+            const container = document.getElementById('background-effects');
+            if(!container) return;
+            
+            // Fireflies (Yellow particles)
+            for(let i=0; i<15; i++) {
+                let f = document.createElement('div');
+                f.className = 'firefly';
+                f.style.left = Math.random()*100 + '%';
+                f.style.top = (Math.random()*100 + 20) + '%'; // Start slightly lower
+                f.style.animationDelay = Math.random()*5 + 's';
+                f.style.animationDuration = (5 + Math.random()*5) + 's';
+                container.appendChild(f);
+            }
+
+            // Shooting Stars (Rare)
+            for(let i=0; i<3; i++) {
+                let s = document.createElement('div');
+                s.className = 'star-trail';
+                s.style.top = Math.random()*30 + '%'; // Top 30% only
+                s.style.left = Math.random()*100 + '%';
+                s.style.animationDelay = (Math.random()*10 + 2) + 's';
+                container.appendChild(s);
+            }
+        }
+
+        // Countdown
+        const target = new Date('April 4, 2026 08:00:00').getTime();
+        function updateCd() {
+            const container = document.getElementById('countdown-container');
+            if(!container) return;
+            
+            const now = new Date().getTime();
+            const diff = target - now;
+            
+            if (diff < 0) {
+                container.innerHTML = '<div class="text-gold text-xl font-serif">Acara Telah Selesai</div>';
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const itemClass = "flex flex-col items-center justify-center w-14 h-14 md:w-16 md:h-16 glass-card rounded-lg";
+            const valClass = "text-gold font-bold text-lg md:text-xl font-serif";
+            const lblClass = "text-[8px] text-gray-400 uppercase tracking-wider mt-1";
+            
+            container.innerHTML = `
+                <div class="${itemClass}"><span class="${valClass}">${d}</span><span class="${lblClass}">Hari</span></div>
+                <div class="${itemClass}"><span class="${valClass}">${h}</span><span class="${lblClass}">Jam</span></div>
+                <div class="${itemClass}"><span class="${valClass}">${m}</span><span class="${lblClass}">Menit</span></div>
+                <div class="${itemClass}"><span class="${valClass}">${s}</span><span class="${lblClass}">Detik</span></div>
+            `;
+        }
+        setInterval(updateCd, 1000);
+        updateCd();
+
+        // Clipboard
+        window.copyAddress = () => {
+            navigator.clipboard.writeText("Zahra & Hadi\nKPR 1 Jl. Tiga No.45 Blok C, Perawang, Riau");
+            const btn = document.getElementById('copy-btn');
+            if(btn) {
+                btn.innerHTML = '<i data-lucide="check" width="14"></i> Tersalin';
+                lucide.createIcons();
+                setTimeout(() => {
+                    btn.innerHTML = '<i data-lucide="copy" width="14"></i> Salin Alamat';
+                    lucide.createIcons();
+                }, 2000);
+            }
+        };
+
+        // RSVP
+        window.setAttendance = (status, btn) => {
+            currentAttendance = status;
+            document.querySelectorAll('.rsvp-status-btn').forEach(b => {
+                b.classList.remove('bg-gold', 'text-black', 'bg-red-900/30', 'text-red-400', 'border-red-900');
+                b.classList.add('bg-transparent', 'text-gray-500', 'border-gray-700');
+            });
+            btn.classList.remove('bg-transparent', 'text-gray-500', 'border-gray-700');
+            if(status === 'attending') btn.classList.add('bg-gold', 'text-black', 'border-gold');
+            else btn.classList.add('bg-red-900/30', 'text-red-400', 'border-red-900');
+        };
+
+        const form = document.getElementById('rsvp-form');
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if(!supabaseClient) return alert('Database offline');
+                
+                const msg = document.getElementById('form-message').value;
+                const btn = document.getElementById('submit-btn');
+                btn.innerHTML = 'MENGIRIM...';
+                btn.disabled = true;
+
+                const { error } = await supabaseClient.from('prayers').insert([
+                    { name: els.formName.value, attendance: currentAttendance, message: msg }
+                ]);
+
+                if(error) {
+                    alert('Gagal mengirim. Cek koneksi.');
+                    console.error(error);
+                } else {
+                    document.getElementById('form-message').value = '';
+                    document.getElementById('submit-success').classList.remove('hidden');
+                    setTimeout(() => document.getElementById('submit-success').classList.add('hidden'), 3000);
+                    fetchPrayers(); // Manual refresh just in case
+                }
+                btn.innerHTML = 'KIRIM <i data-lucide="send" width="12"></i>';
+                btn.disabled = false;
+                lucide.createIcons();
+            });
+        }
+
+        // Data
+        async function fetchPrayers() {
+            if(!supabaseClient) return;
+            const { data, error } = await supabaseClient
+                .from('prayers')
+                .select('*')
+                .order('created_at', { ascending: false });
+            
+            if(data) renderList(data);
+        }
+
+        function renderList(data) {
+            if(!els.list) return;
+            if(!data.length) {
+                els.list.innerHTML = '<div class="text-center py-8 text-gray-600 text-xs">Belum ada ucapan</div>';
+                return;
+            }
+            els.list.innerHTML = data.map(item => {
+                const badge = item.attendance === 'attending' 
+                    ? '<span class="bg-green-900/30 text-green-400 text-[9px] px-2 py-0.5 rounded">Hadir</span>' 
+                    : '<span class="bg-red-900/30 text-red-400 text-[9px] px-2 py-0.5 rounded">Maaf</span>';
+                return `
+                <div class="glass-card p-4 rounded-lg mb-3 fade-in-element is-visible">
+                    <div class="flex justify-between items-start mb-2">
+                        <h5 class="text-gold font-bold text-sm">${item.name || 'Anonim'}</h5>
+                        ${badge}
+                    </div>
+                    <p class="text-gray-300 text-xs italic leading-relaxed">"${item.message}"</p>
+                </div>`;
+            }).join('');
+            
+            // Icons refresh
+            if(window.lucide) lucide.createIcons();
+        }
+
+        function setupRealtime() {
+            if(!supabaseClient) return;
+            supabaseClient.channel('public:prayers')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'prayers' }, 
+            payload => {
+                fetchPrayers(); 
+            })
+            .subscribe();
+        }
+        
+        // Simple Scroll Parallax (Lightweight)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.getElementById('hero-bg');
+            if(heroBg) {
+                heroBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
